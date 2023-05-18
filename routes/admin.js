@@ -66,19 +66,11 @@ router.get("/getGoodsList",async ctx=>{
     let totalRes = await Goods.findAll();
     let total = totalRes.length;
     let lists = await Goods.findAll({
-<<<<<<< HEAD
-        offset:(page-1)*pageSize,
-        limit:pageSize,
-        order:[['id','desc']],
-        //include:Category
-        include:[{model:Category,attributes:['name']}]
-=======
       offset: (parseInt(page) - 1) * parseInt(pageSize),
       limit: parseInt(pageSize),
       order: [["id", "desc"]],
       //include:Category
       include: [{ model: Category, attributes: ["name"] }],
->>>>>>> c29f1e1 (最终提交)
     });
     ctx.body = { code: 800, msg: "商品查询成功", data: { lists ,page,total} }; // 将来通过total计算总页数
 });
@@ -122,7 +114,6 @@ router.post("/goodsSubmit",async ctx=>{
     if (action == "add") {
       // 添加 create()
       await Goods.create(param);
-<<<<<<< HEAD
       ctx.body = { code: 800, mag: "商品添加成功", data: [] };
     } else if (action == "edit") {
       //修改update
@@ -132,7 +123,6 @@ router.post("/goodsSubmit",async ctx=>{
       //删除destroy
       await Goods.destroy({where:{id}});
       ctx.body = { code: 800, mag: "商品删除成功", data: [] };
-=======
       ctx.body = { code: 800, msg: "商品添加成功", data: [] };
     } else if (action == "edit") {
       //修改update
@@ -142,7 +132,6 @@ router.post("/goodsSubmit",async ctx=>{
       //删除destroy
       await Goods.destroy({where:{id}});
       ctx.body = { code: 800, msg: "商品删除成功", data: [] };
->>>>>>> c29f1e1 (最终提交)
     }
   } catch (err) {
     ctx.body = err;
